@@ -11,7 +11,7 @@ function Boxlist(props:boxlist) {
     let result: Array<JSX.Element> = []
 
     for(let b of props.list) {
-        result.push( <Smallbox title={b.title} content={b.content} > </Smallbox> );
+        result.push( <Smallbox key={b.id} title={b.title} content={b.content} > </Smallbox> );
     }
 
 
