@@ -1,7 +1,32 @@
-div {
+body {
     background-color:bisque;
 }
 
 img {
     width: 100px;
 }
+
+form {
+    text-align: center;
+}
+
+#bulletin_submit{
+    height:100px;
+    width:20%;
+    font-size: xx-large;
+}
+
+
+#title {
+    left:50%;
+    width:50%;
+    height:40px;
+    font-size:larger;
+}
+
+#content {
+    font-size: larger;
+    width: 80%;
+    margin: 0 auto;
+}
+
