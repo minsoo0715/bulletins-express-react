@@ -26,7 +26,7 @@ declare module "*.svg" {
 }
 
 declare module "*.css" {
-    const content:any;
+    const content:{[key:string] : string}
     export default content;
 }
 
