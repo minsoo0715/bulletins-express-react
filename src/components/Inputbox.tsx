@@ -1,11 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 function Inputbox(props : inputbox_props) {
+    const [isLoaded, SetisLoaded] = useState<boolean>(false);
+    if(isLoaded) {
+        return (
+            <div className="loader"></div>
+        )   
+    }
     return (
+
+        
         <div>
             <form action="/createOne" method="POST" onSubmit={ function(e) {
                 e.preventDefault()
-                props.onSubmit(e.target.title.value, e.target.content.value)
+                props.onSubmit(e.target.title.value, e.target.content.value, SetisLoaded)
                 
                 e.target.reset()
             }}>
