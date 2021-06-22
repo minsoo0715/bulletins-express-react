@@ -1,3 +1,4 @@
+const CopyPlugin = require('copy-webpack-plugin')
 module.exports = {
     devtool: "source-map",
     entry: [
@@ -7,6 +8,11 @@ module.exports = {
       filename: "bundle.js",
       path: __dirname + "/dist"
     },
+    plugins: [new CopyPlugin([
+      {
+        from: './src/asset/img/favicon.ico'
+      }
+    ])],
     module: {
         rules: [
           
@@ -20,7 +26,7 @@ module.exports = {
             use: ['style-loader', 'css-loader']
           },
           {
-            test: /\.(png|jpg|gif)$/,
+            test: /\.(png|jpg|gif|ico)$/,
             use: ['file-loader']
           },
           {
