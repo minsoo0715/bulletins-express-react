@@ -1,5 +1,5 @@
 {
-  "name": "react_without_CRA_ts",
+  "name": "react-without-cra-ts",
   "version": "1.0.0",
   "description": "react without CRA typescript",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "webpack-dev-server --config ./webpack.config.js --mode development",
     "build": "webpack"
   },
-    "author": "whiteb",
+  "author": "whiteb",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.14.3",
@@ -24,13 +24,15 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.13.0",
     "@babel/runtime": "^7.14.0",
-    "@types/react": "^17.0.8",
-    "@types/react-dom": "^17.0.5",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "bootstrap": "^5.0.1",
     "css-loader": "^5.2.6",
     "file-loader": "^6.2.0",
     "json-loader": "^0.5.7",
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
+    "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
     "style-loader": "^2.0.0",
     "typescript": "^4.2.4"
