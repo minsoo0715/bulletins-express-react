@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { CSSProperties } from 'react'
+import { Table } from 'react-bootstrap';
 import Smallbox from './Smallbox'
 
 
@@ -30,11 +31,28 @@ function Boxlist(props:boxlist) {
         
     }
 
-
+    
     return (
-        <div className="test">
-            {result}
-        </div>    
+        
+        <Table striped bordered hover size="sm" id="list">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>삭제</th>
+                </tr>
+            </thead>
+            <tbody>
+                {result}
+            </tbody>
+
+        </Table>
+
+
+        // <div className="test">
+        //     {result}
+        // </div>    
     );
 }
 

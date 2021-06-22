@@ -29,6 +29,16 @@ form {
     width: 80%;
     margin: 0 auto;
 }
+#list {
+    width: 70%;
+    margin: 0 auto;
+
+}
+
+#Btn {
+    width: 20%;
+    margin: 0 auto;
+}
 
 .loader {
     position: absolute;
