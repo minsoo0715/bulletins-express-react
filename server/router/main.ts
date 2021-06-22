@@ -21,21 +21,30 @@ export const main = (app:Application) => {
         })
     })
 
-    app.post('/bulletins', function(req:Request, res:Response) {
+    app.post('/bulletins', async function(req:Request, res:Response) {
         console.log(req.body)
         let _title = req.body.title
         let _content = req.body.content
 
-        Bulletin.create({
+        const result = await Bulletin.create({
             title: _title,
             content: _content
         })
 
-        
+        res.send(
+            {
+                id : result.dataValues.id
+            }
+        ).end()
+    })
 
-        
-
+    app.delete('/bulletins', async (req:Request, res:Response) => {
+        console.log(req.body)
+        let _id = req.body.id;
+        await Bulletin.destroy({where : {
+            id: _id
+        }
+    })
         res.status(200).end();
-        return;
     })
 }
