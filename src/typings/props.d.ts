@@ -8,12 +8,14 @@ declare global {
     }
 
     interface boxlist {
-        list: Array<box>
+        list: Array<box>,
+        refresh: Function
     }
 
     interface smallbox_props {
         title: string,
         content: string,
+        delete: Function,
         children?: React.ReactNode
     }
 
@@ -23,7 +25,8 @@ declare global {
 
     interface IndexPage_props {
         list:Array<box>,
-        event:Function;
+        event:Function,
+        refresh:Function
     }
 
 }

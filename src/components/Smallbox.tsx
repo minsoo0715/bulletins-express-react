@@ -1,4 +1,5 @@
 import React, {CSSProperties} from 'react'
+import Btn from './Btn'
 
 
 
@@ -11,6 +12,7 @@ function Smallbox(props:smallbox_props) {
         <div style={boxStyle}>
             <p> 제목 : {props.title}</p>
             <p> 내용 : {props.content}</p>
+            <Btn text="삭제" event={props.delete}></Btn>
         </div>
     )
 }
