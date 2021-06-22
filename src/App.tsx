@@ -14,9 +14,10 @@ export function App() {
     const [bulletin_list, Setbulletin] = useState<Array<box>>([])
     const [isChanged, SetisChanged] = useState<boolean>(true)
     const [mode, Setmode] = useState<number>(0)
+    const [latest_id, SetfinalId] = useState<number>();
 
     useEffect(() => {
-        if (isChanged || mode == 0) {
+        if (isChanged) {
             loadData()
         }
         SetisChanged(false)
@@ -24,7 +25,16 @@ export function App() {
 
     const loadData = async () => {
         console.log('GET')
-        const response = await fetch('http://localhost:8000/bulletins');
+        const response = await fetch('http://whiteb.p-e.kr/bulletins', {
+            method: 'GET',
+            mode: 'cors',
+            headers: {
+                'Accept': 'application/json'
+            }
+            }
+        );
+        console.log(response);
+
         const _data = await response.json()
         Setbulletin(_data.data)
         return
@@ -37,25 +47,32 @@ export function App() {
             case 0:
                 const clickAction: Function = () => Setmode(1)
                 return (
-                    <IndexPage list={bulletin_list} event={clickAction}></IndexPage>
+                    <IndexPage refresh={() => {
+                        SetisChanged(true)
+                    }} list={bulletin_list} event={clickAction}></IndexPage>
                 )
             case 1:
-                const submitAction: Function = (_title: string, _content: string) => {
-                    const newBox: box = { title: _title, content: _content, id: bulletin_list.length }
-                    let newList: Array<box> = Array.from(bulletin_list);
-                    fetch('http://localhost:8000/bulletins', {
+                const submitAction: Function = async (_title: string, _content: string, loading: Function) => {
+                    loading(true);
+                    let res = await fetch('http://whiteb.p-e.kr/bulletins', {
                         method: 'POST',
-                        body: JSON.stringify(newBox),
+                        body: JSON.stringify({title: _title, content: _content}),
                         mode: 'cors',
                         headers: {
                             "Content-Type": "application/json"
                         },
 
                     })
+                    console.log('res', res);
+                    const _data = await res.json()
 
+                    const newBox: box = { title: _title, content: _content, id: _data.id}
+                    let newList: Array<box> = Array.from(bulletin_list);
                     newList.push(newBox)
                     Setbulletin(newList)
+                    loading(false);         
                     Setmode(0)
+
                 }
 
                 return (<InputPage onSubmit={submitAction}></InputPage>)
