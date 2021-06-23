@@ -16,28 +16,75 @@ form {
     font-size: xx-large;
 }
 
+#num {
+    width:4%;
+}
+#tt {
+    width:43%;
+}
+#cc {
+    width:43%;
+}
+
+#dd{
+    width: 10%;
+}
+
 
 #title {
+    
     left:50%;
     width:50%;
     height:40px;
     font-size:larger;
+    margin: 0 auto;
 }
 
+.view {
+    text-align:center;  
+    border: 2px solid black;
+}
+
+#Btns {
+    display:inline;
+}
+
+#ViewRoot {
+    
+    margin: 0 auto;
+    max-width: 60%;
+    margin-top: 50px;
+    text-align:center;  
+    
+}
 #content {
+    
+    min-height:600px;
     font-size: larger;
     width: 80%;
+    height: 15%;
     margin: 0 auto;
 }
-#list {
-    width: 70%;
-    margin: 0 auto;
 
+#content.view {
+    text-align:left;
+}
+#list {
+    margin: 0 auto;
+    max-width: 40%;
+    margin-top: 50px;
+
+}
+
+#logo {
+    display: block; 
+    margin: 0px auto;
 }
 
 #Btn {
-    width: 20%;
+    max-width:fit-content;
     margin: 0 auto;
+    display: block;  
 }
 
 .loader {
