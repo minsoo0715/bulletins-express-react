@@ -9,12 +9,15 @@ declare global {
 
     interface boxlist {
         list: Array<box>,
-        refresh: Function
+        refresh: Function,
+        select: Function
     }
 
     interface smallbox_props {
+        id: number,
         title: string,
         content: string,
+        onClick:Function,
         delete: Function,
         children?: React.ReactNode
     }
@@ -24,9 +27,15 @@ declare global {
     }
 
     interface IndexPage_props {
+        selectEvent:Function,
         list:Array<box>,
         event:Function,
         refresh:Function
+    }
+
+    interface viewPage_props {
+        data:box,
+        back:Function
     }
 
 }
