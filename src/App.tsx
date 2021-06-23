@@ -3,10 +3,12 @@ import Boxlist from "./components/Boxlist"
 import Btn from "./components/Btn";
 import Inputbox from "./components/Inputbox";
 import Text from './asset/file/text.txt'
+import apiUrl from './asset/file/apiUrl.txt'
 import Json from './asset/file/object.json'
 import reactLogo from './asset/img/reactlogo.png'
 import InputPage from './Pages/InputPage'
 import IndexPage from './Pages/IndexPage'
+import ViewPage from "./Pages/ViewPage";
 
 
 
@@ -15,6 +17,7 @@ export function App() {
     const [isChanged, SetisChanged] = useState<boolean>(true)
     const [mode, Setmode] = useState<number>(0)
     const [latest_id, SetfinalId] = useState<number>();
+    const [selectBox, SetselectBox] = useState<box>();
 
     useEffect(() => {
         if (isChanged) {
@@ -25,7 +28,7 @@ export function App() {
 
     const loadData = async () => {
         console.log('GET')
-        const response = await fetch('http://whiteb.p-e.kr/bulletins', {
+        const response = await fetch(apiUrl + '/bulletins', {
             method: 'GET',
             mode: 'cors',
             headers: {
@@ -46,15 +49,20 @@ export function App() {
         switch (mode) {
             case 0:
                 const clickAction: Function = () => Setmode(1)
+                const selectAction: Function = (boxId:number) => { 
+                    SetselectBox(bulletin_list[boxId - bulletin_list[0].id]);
+                    Setmode(2);
+                }
+
                 return (
                     <IndexPage refresh={() => {
                         SetisChanged(true)
-                    }} list={bulletin_list} event={clickAction}></IndexPage>
+                    }} list={bulletin_list} event={clickAction} selectEvent={selectAction}></IndexPage>
                 )
             case 1:
                 const submitAction: Function = async (_title: string, _content: string, loading: Function) => {
                     loading(true);
-                    let res = await fetch('http://whiteb.p-e.kr/bulletins', {
+                    let res = await fetch(apiUrl + '/bulletins', {
                         method: 'POST',
                         body: JSON.stringify({title: _title, content: _content}),
                         mode: 'cors',
@@ -77,10 +85,10 @@ export function App() {
 
                 return (<InputPage onSubmit={submitAction}></InputPage>)
             case 2:
-
-
-
-                break;
+                return (<ViewPage data={selectBox} back={() => {
+                    Setmode(0)
+                }}></ViewPage> )
+                
         }
     }
 
@@ -91,12 +99,14 @@ export function App() {
 
     return (
         <div id="frame">
+             {  
+                <img src={reactLogo} id={"logo"}></img>
+                
+            }
             {
                 GetMain()
             }
-            {
-                <img src={reactLogo}></img>
-            }
+           
 
         </div>
     )
