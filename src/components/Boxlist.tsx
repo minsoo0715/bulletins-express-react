@@ -1,6 +1,7 @@
 import React, { CSSProperties } from 'react'
 import { Table } from 'react-bootstrap';
 import Smallbox from './Smallbox'
+import apiUrl from '../asset/file/apiUrl.txt'
 
 
 
@@ -9,12 +10,17 @@ import Smallbox from './Smallbox'
 
 
 function Boxlist(props:boxlist) {
+
+    const whenClick:Function = (box_id:number) => {
+        props.select(box_id)
+    }
+
     let result: Array<JSX.Element> = []
 
     for(let b of props.list) {
         result.push( <Smallbox key={b.id} delete={
         async () => {
-             await fetch('http://whiteb.p-e.kr/bulletins', {
+             await fetch(apiUrl + '/bulletins', {
                         method: 'DELETE',
                         body: JSON.stringify({
                             id: b.id
@@ -26,7 +32,7 @@ function Boxlist(props:boxlist) {
 
                     })
                 await props.refresh()
-        }} title={b.title} content={b.content} > </Smallbox> );
+        }} title={b.title} content={b.content} id={b.id} onClick={whenClick}> </Smallbox> );
         
         
     }
@@ -37,10 +43,10 @@ function Boxlist(props:boxlist) {
         <Table striped bordered hover size="sm" id="list">
             <thead>
                 <tr>
-                    <th>#</th>
-                    <th>제목</th>
-                    <th>내용</th>
-                    <th>삭제</th>
+                    <th id="num">#</th>
+                    <th id="tt">제목</th>
+                    <th id="cc">내용</th>
+                    <th id="dd">삭제</th>
                 </tr>
             </thead>
             <tbody>
